@@ -1,10 +1,11 @@
-version: '3'
+version: '3.2'
 
 volumes:
   backend:
 
 services:
   api_gateway:
+    user: 1000:1000
     build: ./nginx/
     ports:
       - 80:80
@@ -17,6 +18,7 @@ services:
       - backend:/opt/backend
 
   backend_php:
+    user: 1000:1000
     build: ./php/
     expose:
       - 9000
