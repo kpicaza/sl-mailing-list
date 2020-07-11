@@ -1,0 +1,25 @@
+version: '3'
+
+volumes:
+  backend:
+
+services:
+  api_gateway:
+    build: ./nginx/
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - backend_php
+    depends_on:
+      - backend_php
+    volumes:
+      - backend:/opt/backend
+
+  backend_php:
+    build: ./php/
+    expose:
+      - 9000
+    volumes:
+      - ./backend:/opt/backend
+    working_dir: /opt/backend
