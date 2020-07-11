@@ -4,8 +4,10 @@ RUN apt-get update && apt-get install -y git zip zlib1g-dev libicu-dev g++ libxm
 
 RUN docker-php-ext-install pdo_mysql bcmath iconv pcntl mbstring intl calendar
 
-RUN usermod -u 1000 www-data
-
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+RUN usermod -u 1000 www-data
+
 RUN composer global require hirak/prestissimo
+RUN mv /root/.composer /var/www/.composer
+RUN chown -R 1000:1000 /var/www
