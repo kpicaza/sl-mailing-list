@@ -2,20 +2,23 @@ version: '3.2'
 
 volumes:
   backend:
+  website:
 
 services:
   api_gateway:
-    user: 1000:1000
     build: ./nginx/
     ports:
       - 80:80
       - 443:443
     links:
       - backend_php
+      - public_website
     depends_on:
       - backend_php
+      - public_website
     volumes:
       - backend:/opt/backend
+      - website:/opt/website
 
   backend_php:
     user: 1000:1000
@@ -25,3 +28,21 @@ services:
     volumes:
       - ./backend:/opt/backend
     working_dir: /opt/backend
+
+  node:
+    user: 1000:1000
+    image: node:12.18
+    volumes:
+      - ./website:/opt/website
+    working_dir: /opt/website
+
+  public_website:
+    user: 1000:1000
+    image: node:12.18
+    expose:
+      - 3000
+    volumes:
+      - ./website:/opt/website
+    restart: always
+    working_dir: /opt/website
+    command: 'yarn dev'
