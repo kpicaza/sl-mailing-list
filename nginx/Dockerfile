@@ -5,5 +5,6 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048  -keyout /etc/nginx/ngin
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./backend-api.conf /etc/nginx/conf.d/backend-api.conf
+COPY ./public-website.conf /etc/nginx/conf.d/public-website.conf
 
 RUN usermod -u 1000 www-data
