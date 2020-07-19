@@ -20,7 +20,7 @@ docker-compose build
 ```bash
 docker-compose up 
 ```
-Then open your browser at [http://127.0.0.1](http://127.0.0.1)
+Then open your browser at [http://127.0.0.1](http://127.0.0.1) to see the Nuxt app, and open [http://127.0.0.1/api/v1/](http://127.0.0.1/api/v1/) for Antidot Framework API  .
 
 ## Run PHP
 
@@ -38,4 +38,16 @@ docker-compose run --rm backend_php composer
 
 ```bash
 docker-compose run --rm backend_php bin/console 
+```
+
+## Run Node 
+
+```bash
+docker-compose run --rm node --version 
+```
+
+## Run Yarn 
+
+```bash
+docker-compose run --rm node yarn --version 
 ```
