@@ -1,0 +1,33 @@
+service: app
+
+provider:
+    name: aws
+    region: eu-west-1
+    runtime: provided
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    api:
+        handler: public/index.php
+        description: ''
+        timeout: 5
+        layers:
+            - ${bref:layer.php-74-fpm}
+        events:
+            -   http: 'ANY /'
+            -   http: 'ANY /{proxy+}'
+    console:
+        handler: bin/console
+        description: ''
+        timeout: 30
+        layers:
+            - ${bref:layer.php-74} # PHP
+            - ${bref:layer.console} # The "console" layer
+
+# Exclude files from deployment
+package:
+    exclude:
+        - 'node_modules/**'
+        - 'tests/**'

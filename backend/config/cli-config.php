@@ -9,7 +9,7 @@ $config = require __DIR__ . '/config.php';
 $cliConfig['services'] = $config['console']['services'] ?? [];
 $cliConfig['factories'] = $config['console']['factories'] ?? [];
 $cacheConfig = [
-    'cli_config_cache_path' => 'var/cache/cli-config-cache.php',
+    'cli_config_cache_path' => '/tmp/var/cache/cli-config-cache.php',
 ];
 
 return (new ConfigAggregator([
