@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   server: {
     host: '0.0.0.0' // default: localhost
   },
@@ -46,10 +46,10 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
+  buildModule: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
-  ],
+    process.env.NODE_ENV !== 'production' ? '@nuxtjs/eslint-module' : ''
+  ].filter(Boolean),
   /*
    ** Nuxt.js modules
    */
